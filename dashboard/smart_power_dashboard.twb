@@ -557,27 +557,27 @@
       <style>
         <style-rule element='mark'>
           <encoding attr='color' field='[:Measure Names]' type='palette'>
-            <map to='#26aba4'>
+            <map to='#215138'>
               <bucket>&quot;[federated.1hu9wts0qo0s771a2ks8h0qjc9uw].[avg:carbon_intensity_gco2_kwh:qk]&quot;</bucket>
             </map>
-            <map to='#26aba4'>
+            <map to='#81c2a8'>
               <bucket>&quot;[federated.1hu9wts0qo0s771a2ks8h0qjc9uw].[avg:renewable_share:qk]&quot;</bucket>
             </map>
-            <map to='#26aba4'>
+            <map to='#215138'>
               <bucket>&quot;[federated.1hu9wts0qo0s771a2ks8h0qjc9uw].[sum:carbon_intensity_gco2_kwh:qk]&quot;</bucket>
             </map>
-            <map to='#c9aef2'>
+            <map to='#36676b'>
               <bucket>&quot;[federated.1hu9wts0qo0s771a2ks8h0qjc9uw].[avg:electricity_price:qk]&quot;</bucket>
             </map>
           </encoding>
           <encoding attr='color' field='[none:Calculation_3712051608006656:nk]' type='palette'>
-            <map to='#4ed4cd'>
+            <map to='#f09d46'>
               <bucket>&quot;Recommended: 12:00–16:00&quot;</bucket>
             </map>
-            <map to='#c398f5'>
+            <map to='#36676b'>
               <bucket>&quot;Other hours&quot;</bucket>
             </map>
-            <map to='#f28e2b'>
+            <map to='#f09d46'>
               <bucket>&quot;Recommended: 12:00–16:00&quot;</bucket>
             </map>
           </encoding>
@@ -726,7 +726,7 @@
             <trendline enable-confidence-bands='false' enable-instant-analytics='true' enabled='true' exclude-color='false' exclude-intercept='false' fit='linear' />
             <style>
               <style-rule element='mark'>
-                <format attr='mark-color' value='#c9aef2' />
+                <format attr='mark-color' value='#36676b' />
                 <format attr='size' value='1.1314364671707153' />
                 <format attr='shape' value=':filled/circle' />
                 <format attr='mark-transparency' value='98' />
@@ -785,7 +785,7 @@
             </encodings>
             <style>
               <style-rule element='mark'>
-                <format attr='mark-color' value='#26aba4' />
+                <format attr='mark-color' value='#f09d46' />
               </style-rule>
             </style>
           </pane>
@@ -990,7 +990,7 @@
                   <formatted-text>
                     <run bold='true' fontcolor='#333333' fontsize='14'>Recommended Window</run>
                     <run>Æ&#10;</run>
-                    <run bold='true' fontcolor='#26aba4' fontsize='20'>12:00–16:00</run>
+                    <run bold='true' fontcolor='#f09d46' fontsize='20'>12:00–16:00</run>
                     <run>Æ&#10;</run>
                     <run fontsize='11'>Amsterdam local time</run>
                   </formatted-text>
@@ -1120,7 +1120,7 @@
                   <formatted-text>
                     <run bold='true' fontcolor='#333333' fontsize='14'>Recommended Window</run>
                     <run>Æ&#10;</run>
-                    <run bold='true' fontcolor='#26aba4' fontsize='20'>12:00–16:00</run>
+                    <run bold='true' fontcolor='#f09d46' fontsize='20'>12:00–16:00</run>
                     <run>Æ&#10;</run>
                     <run fontsize='11'>Amsterdam local time</run>
                   </formatted-text>

@@ -9,6 +9,11 @@ import streamlit as st
 
 DATA_PATH = Path(__file__).parent / "dashboard" / "smart_power_for_tableau.csv"
 WINDOW_SIZE = 4
+PETROL = "#36676B"
+DARK_GREEN = "#215138"
+MINT = "#81C2A8"
+ORANGE = "#F09D46"
+BURNT_ORANGE = "#AF5622"
 DEVICE_PRESETS = {
     "Washing machine": 1.0,
     "Dishwasher": 1.2,
@@ -31,12 +36,12 @@ st.markdown(
     .hero {
         padding: 1.5rem 1.7rem;
         border-radius: 18px;
-        background: linear-gradient(120deg, #f5f3ff 0%, #ecfeff 100%);
-        border: 1px solid #ddd6fe;
+        background: linear-gradient(120deg, #ffffff 0%, #eef7f3 100%);
+        border: 1px solid #81c2a8;
         margin-bottom: 1rem;
     }
-    .hero h1 {margin: 0; font-size: 2.25rem; color: #202124;}
-    .hero p {margin: .45rem 0 0; color: #52525b; font-size: 1.05rem;}
+    .hero h1 {margin: 0; font-size: 2.25rem; color: #215138;}
+    .hero p {margin: .45rem 0 0; color: #36676b; font-size: 1.05rem;}
     .status-card {
         padding: 1.15rem 1.3rem;
         border-radius: 14px;
@@ -46,10 +51,10 @@ st.markdown(
     }
     .status-card h3 {margin: 0 0 .35rem;}
     .status-card p {margin: .2rem 0;}
-    .small-note {color: #71717a; font-size: .88rem;}
+    .small-note {color: #36676b; font-size: .88rem;}
     div[data-testid="stMetric"] {
         background: #ffffff;
-        border: 1px solid #e4e4e7;
+        border: 1px solid #d6e7df;
         padding: .8rem 1rem;
         border-radius: 12px;
     }
@@ -173,22 +178,22 @@ def status_details(row: pd.Series) -> tuple[str, str, str, str]:
         return (
             "Good time to use electricity",
             "This historical hour had both a relatively low price and low carbon intensity.",
-            "#059669",
-            "#ecfdf5",
+            DARK_GREEN,
+            "#e8f4ef",
         )
     if is_cheap or is_low_carbon:
         advantage = "lower price" if is_cheap else "lower carbon intensity"
         return (
             "Mixed conditions",
             f"This historical hour had {advantage}, but not both advantages.",
-            "#d97706",
-            "#fffbeb",
+            ORANGE,
+            "#fff4e8",
         )
     return (
         "Better to wait if possible",
         "This historical hour was neither low-price nor low-carbon relative to the dataset.",
-        "#dc2626",
-        "#fef2f2",
+        BURNT_ORANGE,
+        "#fbede7",
     )
 
 
@@ -294,8 +299,8 @@ with overview_tab:
             y=alt.Y("electricity_price:Q", title="Average price (€/kWh)"),
             color=alt.condition(
                 "datum.recommended",
-                alt.value("#14b8a6"),
-                alt.value("#c4b5fd"),
+                alt.value(ORANGE),
+                alt.value(PETROL),
             ),
             tooltip=[
                 alt.Tooltip("hour_local:O", title="Hour"),
@@ -305,7 +310,7 @@ with overview_tab:
     )
     carbon_line = (
         alt.Chart(chart_data)
-        .mark_line(point=True, color="#0f766e", strokeWidth=3)
+        .mark_line(point=True, color=DARK_GREEN, strokeWidth=3)
         .encode(
             x=alt.X("hour_local:O", title="Amsterdam local hour"),
             y=alt.Y(
@@ -422,7 +427,7 @@ with patterns_tab:
             color=alt.Color(
                 "is_cheap_and_low_carbon:Q",
                 title="Overlap rate",
-                scale=alt.Scale(scheme="tealblues"),
+                scale=alt.Scale(range=["#f4f8f6", MINT, DARK_GREEN]),
                 legend=alt.Legend(format=".0%"),
             ),
             tooltip=[

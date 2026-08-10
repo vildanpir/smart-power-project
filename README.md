@@ -45,6 +45,10 @@ Wattnet records are accepted only when the response metadata reports `valid=true
 
 All source timestamps and database joins use UTC. Local-hour analysis uses `Europe/Amsterdam`, including daylight-saving-time conversion.
 
+### Visual language
+
+Every project visual uses one shared palette: petrol `#36676B` for price and base series, dark green `#215138` for carbon, mint `#81C2A8` for renewable energy, orange `#F09D46` for the recommended window, and burnt orange `#AF5622` for adverse or secondary emphasis. White remains the primary background for readability. Labels and line styles accompany colour so meaning never depends on colour alone.
+
 ## Architecture
 
 ```text
@@ -80,6 +84,8 @@ smart-power-project/
 │   ├── transform.py
 │   └── database.py
 ├── streamlit_app.py
+├── .streamlit/
+│   └── config.toml
 ├── .env.example
 └── requirements.txt
 ```

@@ -6,3 +6,8 @@ scikit-learn
 matplotlib
 seaborn
 sqlalchemy
+pymysql
+streamlit
+altair
+jupyter
+nbconvert

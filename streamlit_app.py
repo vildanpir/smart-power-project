@@ -9,11 +9,11 @@ import streamlit as st
 
 DATA_PATH = Path(__file__).parent / "dashboard" / "smart_power_for_tableau.csv"
 WINDOW_SIZE = 4
-PETROL = "#36676B"
-DARK_GREEN = "#215138"
-MINT = "#81C2A8"
-ORANGE = "#F09D46"
-BURNT_ORANGE = "#AF5622"
+PETROL = "#A9C9EA"
+DARK_GREEN = "#C1FF72"
+MINT = "#C1FF72"
+ORANGE = "#C1FF72"
+BURNT_ORANGE = "#DCEBFA"
 DEVICE_PRESETS = {
     "Washing machine": 1.0,
     "Dishwasher": 1.2,
@@ -25,39 +25,97 @@ DEVICE_PRESETS = {
 
 st.set_page_config(
     page_title="Smart Power Netherlands",
-    page_icon="⚡",
     layout="wide",
 )
 
 st.markdown(
     """
     <style>
-    .block-container {padding-top: 2rem; padding-bottom: 3rem;}
-    .hero {
-        padding: 1.5rem 1.7rem;
-        border-radius: 18px;
-        background: linear-gradient(120deg, #ffffff 0%, #eef7f3 100%);
-        border: 1px solid #81c2a8;
-        margin-bottom: 1rem;
+    [data-testid="stHeader"] {height: 0; min-height: 0;}
+    [data-testid="stDecoration"], footer {display: none;}
+    .block-container {
+        max-width: 1500px;
+        padding: .6rem 1rem .8rem;
     }
-    .hero h1 {margin: 0; font-size: 2.25rem; color: #215138;}
-    .hero p {margin: .45rem 0 0; color: #36676b; font-size: 1.05rem;}
-    .status-card {
-        padding: 1.15rem 1.3rem;
-        border-radius: 14px;
-        border-left: 7px solid var(--status-color);
-        background: var(--status-bg);
-        min-height: 150px;
+    [data-testid="stVerticalBlock"] {gap: .55rem;}
+    [data-testid="stHorizontalBlock"] {gap: .7rem;}
+    [data-testid="stSidebar"] {
+        min-width: 250px !important;
+        max-width: 250px !important;
     }
-    .status-card h3 {margin: 0 0 .35rem;}
-    .status-card p {margin: .2rem 0;}
-    .small-note {color: #36676b; font-size: .88rem;}
-    div[data-testid="stMetric"] {
-        background: #ffffff;
-        border: 1px solid #d6e7df;
-        padding: .8rem 1rem;
-        border-radius: 12px;
+    [data-testid="stSidebar"] [data-testid="stSidebarContent"] {
+        padding: .65rem .8rem;
     }
+    [data-testid="stSidebar"] [data-testid="stVerticalBlock"] {gap: .45rem;}
+    [data-testid="stSidebar"] h2 {font-size: 1.2rem; margin-bottom: .15rem;}
+    [data-testid="stSidebar"] label p {font-size: .82rem;}
+.hero {
+    padding: .75rem 1rem;
+    border-radius: 14px;
+    background: linear-gradient(120deg, #244E7D 0%, #173B63 100%);
+    border: 1px solid #5F86BA;
+    margin-bottom: .35rem;
+}
+.hero h1 {margin: 0; font-size: 1.65rem; color: #F5F9FD;}
+.hero p {margin: .2rem 0 0; color: #DCEBFA; font-size: .85rem;}
+.status-card {
+    padding: .7rem .85rem;
+    border-radius: 14px;
+    border-left: 7px solid var(--status-color);
+    background: var(--status-bg);
+    min-height: 112px;
+    color: #F5F9FD;
+}
+.status-card h3 {margin: 0 0 .2rem; color: var(--status-color); font-size: 1.15rem;}
+.status-card p {margin: .12rem 0; color: #F5F9FD; font-size: .84rem;}
+.small-note {color: #BFD5EC; font-size: .76rem;}
+.chart-top-space {height: .25rem;}
+.patterns-heading {
+    margin: .15rem 0 .45rem;
+    padding-left: .8rem;
+    border-left: 6px solid #c1ff72;
+    color: #F5F9FD;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+div[data-testid="stExpander"] {
+    border: 1px solid #4069A7;
+    border-top: 4px solid #c1ff72;
+    background: linear-gradient(90deg, #244E7D 0%, #173B63 100%);
+}
+div[data-testid="stExpander"] summary {color: #F5F9FD;}
+div[data-testid="stMetric"] {
+    background: #244E7D;
+    border: 1px solid #4069A7;
+    padding: .42rem .55rem;
+    border-radius: 12px;
+    min-height: 72px;
+}
+div[data-testid="stMetric"] [data-testid="stMetricLabel"],
+div[data-testid="stMetric"] [data-testid="stMetricValue"] {color: #F5F9FD;}
+div[data-testid="stMetric"] [data-testid="stMetricLabel"] p {
+    font-size: .72rem;
+    line-height: 1.1;
+    white-space: normal;
+}
+div[data-testid="stMetric"] [data-testid="stMetricValue"] {
+    font-size: 1.35rem;
+    line-height: 1.15;
+}
+div[data-testid="stAlert"] {padding: .45rem .7rem; min-height: auto;}
+button[data-baseweb="tab"] {height: 2.15rem; padding: 0 .7rem;}
+h1 {font-size: 1.75rem;}
+h2 {font-size: 1.35rem;}
+h3 {font-size: 1.1rem;}
+@media (max-height: 900px) {
+    .block-container {padding-top: .35rem; padding-bottom: .5rem;}
+    [data-testid="stVerticalBlock"] {gap: .35rem;}
+    .hero {padding: .55rem .85rem;}
+    .hero h1 {font-size: 1.45rem;}
+    .hero p {font-size: .78rem;}
+    div[data-testid="stMetric"] {min-height: 62px; padding: .32rem .45rem;}
+}
     </style>
     """,
     unsafe_allow_html=True,
@@ -151,6 +209,41 @@ def find_best_window(
     return int(winner["start"]), int(winner["end"]), scores
 
 
+def weekday_best_windows(data: pd.DataFrame, priority: str) -> pd.DataFrame:
+    """Build one easy-to-read four-hour recommendation for each weekday."""
+    weekday_order = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+    ]
+    rows = []
+    local_data = data.assign(weekday=data["timestamp_local"].dt.day_name())
+    for weekday in weekday_order:
+        day_profile = hourly_profile(local_data[local_data["weekday"] == weekday])
+        start, end, _ = find_best_window(day_profile, priority)
+        window_rows = day_profile[
+            day_profile["hour_local"].between(start, end - 1)
+        ]
+        rows.append(
+            {
+                "weekday": weekday,
+                "start": start,
+                "end": end,
+                "midpoint": (start + end) / 2,
+                "window": window_label(start, end),
+                "average_price": window_rows["electricity_price"].mean(),
+                "average_carbon": window_rows[
+                    "carbon_intensity_gco2_kwh"
+                ].mean(),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
 def window_label(start: int, end: int) -> str:
     return f"{start:02d}:00–{end:02d}:00"
 
@@ -165,10 +258,10 @@ def cost_difference_label(difference: float) -> str:
 
 def emissions_difference_label(difference: float) -> str:
     if difference > 0:
-        return f"{difference:.2f} kg lower estimated emissions"
+        return f"{difference:.2f} kg lower associated carbon"
     if difference < 0:
-        return f"{abs(difference):.2f} kg higher estimated emissions"
-    return "No estimated emissions difference"
+        return f"{abs(difference):.2f} kg higher associated carbon"
+    return "No associated carbon difference"
 
 
 def status_details(row: pd.Series) -> tuple[str, str, str, str]:
@@ -179,7 +272,7 @@ def status_details(row: pd.Series) -> tuple[str, str, str, str]:
             "Good time to use electricity",
             "This historical hour had both a relatively low price and low carbon intensity.",
             DARK_GREEN,
-            "#e8f4ef",
+            "#244E7D",
         )
     if is_cheap or is_low_carbon:
         advantage = "lower price" if is_cheap else "lower carbon intensity"
@@ -187,13 +280,13 @@ def status_details(row: pd.Series) -> tuple[str, str, str, str]:
             "Mixed conditions",
             f"This historical hour had {advantage}, but not both advantages.",
             ORANGE,
-            "#fff4e8",
+            "#203F63",
         )
     return (
         "Better to wait if possible",
         "This historical hour was neither low-price nor low-carbon relative to the dataset.",
         BURNT_ORANGE,
-        "#fbede7",
+        "#1B344F",
     )
 
 
@@ -208,7 +301,7 @@ profile = hourly_profile(df)
 st.markdown(
     """
     <div class="hero">
-      <h1>⚡ Smart Power Netherlands</h1>
+    <h1>Smart Power Netherlands</h1>
       <p>Find historically lower-cost, lower-carbon hours for flexible electricity use.</p>
     </div>
     """,
@@ -328,6 +421,7 @@ with overview_tab:
             ],
         )
     )
+    st.markdown('<div class="chart-top-space"></div>', unsafe_allow_html=True)
     st.altair_chart(
         alt.layer(price_bars, carbon_line)
         .resolve_scale(y="independent")
@@ -376,15 +470,15 @@ with planner_tab:
             delta_color="off",
         )
         result_metrics[1].metric(
-            "Estimated emissions in overall historical best window",
-            f"{recommended_emissions:.2f} kg CO₂e",
+            "Associated carbon in overall historical best window",
+            f"{recommended_emissions:.2f} kg CO₂",
             delta=emissions_difference_label(carbon_saving),
             delta_color="off",
         )
         if cost_saving > 0 and carbon_saving > 0:
             st.success(
                 f"Historical suggestion: run **{device.lower()}** during **{best_label}**. "
-                "In this comparison, it reduces both estimated cost and emissions."
+                "In this comparison, it reduces both estimated cost and associated carbon."
             )
         elif cost_saving > 0 or carbon_saving > 0:
             st.warning(
@@ -397,11 +491,17 @@ with planner_tab:
             "the overall historical best window for this comparison."
             )
     st.caption(
-        "Estimates multiply historical hourly intensity by the entered kWh. They do not include tariffs, taxes, standby use, or appliance efficiency."
+        "Estimates multiply historical hourly intensity by the entered kWh. The price data includes VAT, but not network or fixed charges, contract differences, standby use, or appliance efficiency."
     )
 
 with patterns_tab:
-    st.subheader("When do low-price and low-carbon conditions overlap?")
+    st.markdown(
+        '<div class="patterns-heading">Best time to use electricity by day</div>',
+        unsafe_allow_html=True,
+    )
+    st.caption(
+        f"Recommended four-hour windows based on historical {priority.lower()} conditions."
+    )
     weekday_order = [
         "Monday",
         "Tuesday",
@@ -411,40 +511,62 @@ with patterns_tab:
         "Saturday",
         "Sunday",
     ]
-    heatmap_data = (
-        df.assign(weekday=df["timestamp_local"].dt.day_name())
-        .groupby(["weekday", "hour_local"], as_index=False)[
-            "is_cheap_and_low_carbon"
-        ]
-        .mean()
-    )
-    heatmap = (
-        alt.Chart(heatmap_data)
-        .mark_rect(cornerRadius=2)
+    weekday_windows = weekday_best_windows(df, priority)
+    schedule_bars = (
+        alt.Chart(weekday_windows)
+        .mark_bar(cornerRadius=7, height=22, color=ORANGE)
         .encode(
-            x=alt.X("hour_local:O", title="Amsterdam local hour"),
-            y=alt.Y("weekday:N", sort=weekday_order, title=None),
-            color=alt.Color(
-                "is_cheap_and_low_carbon:Q",
-                title="Overlap rate",
-                scale=alt.Scale(range=["#f4f8f6", MINT, DARK_GREEN]),
-                legend=alt.Legend(format=".0%"),
+            x=alt.X(
+                "start:Q",
+                title="Amsterdam local hour",
+                scale=alt.Scale(domain=[0, 24]),
+                axis=alt.Axis(values=list(range(0, 25, 2)), format="02d"),
             ),
+            x2="end:Q",
+            y=alt.Y("weekday:N", sort=weekday_order, title=None),
             tooltip=[
                 alt.Tooltip("weekday:N", title="Day"),
-                alt.Tooltip("hour_local:O", title="Hour"),
-                alt.Tooltip(
-                    "is_cheap_and_low_carbon:Q",
-                    title="Cheap & low-carbon rate",
-                    format=".1%",
-                ),
+                alt.Tooltip("window:N", title="Best window"),
+                alt.Tooltip("average_price:Q", title="Avg. price", format=".3f"),
+                alt.Tooltip("average_carbon:Q", title="Avg. carbon", format=".0f"),
             ],
         )
-        .properties(height=300)
+        .properties(height=245)
     )
-    st.altair_chart(heatmap, width="stretch")
+    schedule_labels = (
+        alt.Chart(weekday_windows)
+        .mark_text(color="#244E7D", fontWeight="bold", fontSize=12)
+        .encode(
+            x="midpoint:Q",
+            y=alt.Y("weekday:N", sort=weekday_order),
+            text="window:N",
+        )
+    )
+    chart_column, table_column = st.columns([1.35, 1])
+    with chart_column:
+        st.altair_chart(schedule_bars + schedule_labels, width="stretch")
+    with table_column:
+        display_windows = weekday_windows[
+            ["weekday", "window", "average_price", "average_carbon"]
+        ].rename(
+            columns={
+                "weekday": "Day",
+                "window": "Recommended window",
+                "average_price": "Avg. price",
+                "average_carbon": "Avg. carbon",
+            }
+        )
+        st.dataframe(
+            display_windows,
+            hide_index=True,
+            width="stretch",
+            column_config={
+                "Avg. price": st.column_config.NumberColumn(format="€%.3f/kWh"),
+                "Avg. carbon": st.column_config.NumberColumn(format="%.0f gCO₂/kWh"),
+            },
+        )
 
-    with st.expander("Methodology and limitations", expanded=True):
+    with st.expander("How these recommendations are calculated", expanded=False):
         st.markdown(
             f"""
             - **Scope:** {len(df):,} validated hourly observations, from
@@ -452,7 +574,7 @@ with patterns_tab:
               {df['date_local'].max().strftime('%d %B %Y')}.
             - **Price:** Dutch hourly electricity-price observations.
             - **Carbon:** estimated with Wattnet's methodology and global
-              life-cycle emission factors, expressed as gCO₂e/kWh.
+              life-cycle emission factors, expressed as gCO₂/kWh as reported by Wattnet.
             - **Low price / low carbon:** bottom quartile of each measure in
               the validated dataset.
             - **Recommendation:** a four-hour historical window. Balanced mode

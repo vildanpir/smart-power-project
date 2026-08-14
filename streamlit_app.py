@@ -69,7 +69,20 @@ st.markdown(
 .status-card h3 {margin: 0 0 .2rem; color: var(--status-color); font-size: 1.15rem;}
 .status-card p {margin: .12rem 0; color: #F5F9FD; font-size: .84rem;}
 .small-note {color: #BFD5EC; font-size: .76rem;}
-.chart-top-space {height: .25rem;}
+.chart-top-space {height: .8rem;}
+.comparison-note {
+    margin-top: .25rem;
+    padding: .8rem 1rem;
+    border-radius: 12px;
+    font-size: .86rem;
+    line-height: 1.45;
+}
+.comparison-note-positive {
+    color: #F5F9FD;
+    background: linear-gradient(120deg, #255D57 0%, #1E494D 100%);
+    border: 1px solid #68B9AE;
+    border-left: 6px solid #C1FF72;
+}
 .patterns-heading {
     margin: .15rem 0 .45rem;
     padding-left: .8rem;
@@ -285,8 +298,8 @@ def status_details(row: pd.Series) -> tuple[str, str, str, str]:
     return (
         "Better to wait if possible",
         "This historical hour was neither low-price nor low-carbon relative to the dataset.",
-        BURNT_ORANGE,
-        "#1B344F",
+        "#FFF3F4",
+        "#A8323E",
     )
 
 
@@ -486,9 +499,12 @@ with planner_tab:
                 "Try changing the priority in the sidebar."
             )
         else:
-            st.info(
+            st.markdown(
+                '<div class="comparison-note comparison-note-positive">'
                 "The selected historical hour already performs as well as, or better than, "
-            "the overall historical best window for this comparison."
+                "the overall historical best window for this comparison."
+                "</div>",
+                unsafe_allow_html=True,
             )
     st.caption(
         "Estimates multiply historical hourly intensity by the entered kWh. The price data includes VAT, but not network or fixed charges, contract differences, standby use, or appliance efficiency."

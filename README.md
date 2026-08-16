@@ -1,4 +1,4 @@
-# Smart Power Netherlands ⚡
+# Smart Power Netherlands
 
 Smart Power answers one practical question: **when should flexible electricity use be shifted in the Netherlands to reduce both cost and carbon intensity?**
 
@@ -26,7 +26,7 @@ The 12:00–16:00 and 13:00–17:00 windows have the same historical cheap-and-l
 
 | Source | Use | Resolution / access |
 |---|---|---|
-| EnergyZero | Dutch day-ahead electricity prices | Hourly, no key |
+| EnergyZero | Dutch hourly electricity prices, requested inclusive of VAT | Hourly, no key |
 | ENTSO-E | Actual generation by source and renewable share | Hourly, free API token |
 | Open-Meteo | Wind speed and solar radiation | Hourly, no key |
 | Wattnet | Netherlands carbon intensity | 15-minute, global life-cycle gCO₂/kWh; OAuth token or session cookie |
@@ -47,7 +47,7 @@ All source timestamps and database joins use UTC. Local-hour analysis uses `Euro
 
 ### Visual language
 
-Every project visual uses one shared palette: petrol `#36676B` for price and base series, dark green `#215138` for carbon, mint `#81C2A8` for renewable energy, orange `#F09D46` for the recommended window, and burnt orange `#AF5622` for adverse or secondary emphasis. White remains the primary background for readability. Labels and line styles accompany colour so meaning never depends on colour alone.
+The final presentation and Streamlit prototype share a navy/deep-blue, off-white, sky-blue and lime visual system. Analytical notebooks retain a restrained petrol/green/orange chart palette. Labels and line styles accompany colour so meaning never depends on colour alone.
 
 ## Architecture
 
@@ -74,7 +74,12 @@ smart-power-project/
 │   ├── smart-power-eda.ipynb
 │   └── smart-power-ml.ipynb
 ├── presentation/
-│   └── Smart_Power_Final_Presentation.pptx
+│   ├── Smart_Power_Final_Presentation.pptx
+│   └── assets/
+│       └── amsterdam_hourly_price.csv
+├── docs/
+│   ├── Smart_Power_Teknik_Proje_Rehberi.docx
+│   └── build_technical_interview_guide.py
 ├── sql/
 │   ├── 00_create_database.sql
 │   ├── 01_create_views.sql
@@ -82,7 +87,8 @@ smart-power-project/
 ├── src/
 │   ├── ingest.py
 │   ├── transform.py
-│   └── database.py
+│   ├── database.py
+│   └── presentation_metrics.py
 ├── streamlit_app.py
 ├── .streamlit/
 │   └── config.toml
@@ -137,11 +143,14 @@ Run these notebooks in order:
 
 The reusable SQL is also available in [`sql/01_create_views.sql`](sql/01_create_views.sql) and [`sql/02_quality_checks.sql`](sql/02_quality_checks.sql).
 
-## Dashboards and presentation
+## Dashboards, presentation and technical guide
 
 - [Tableau workbook](dashboard/smart_power_dashboard.twb) — open it with [the Tableau-ready CSV](dashboard/smart_power_for_tableau.csv) next to the workbook. If Tableau prompts for a missing file on another computer, reconnect the text source to that CSV.
 - [Streamlit prototype](streamlit_app.py) — launch with `streamlit run streamlit_app.py`.
-- [Final presentation](presentation/Smart_Power_Final_Presentation.pptx) — designed for a presentation of no more than 10 minutes.
+- [Final stakeholder presentation](presentation/Smart_Power_Final_Presentation.pptx) — seven-slide stakeholder deck, designed for a short historical Streamlit demonstration after slide 5.
+- [Presentation chart data](presentation/assets/amsterdam_hourly_price.csv) — source data for the hourly-price chart used in the deck.
+- [Technical project guide](docs/Smart_Power_Teknik_Proje_Rehberi.docx) — five-page technical guide for interviews and project handover.
+- [Presentation metrics script](src/presentation_metrics.py) — reproducible calculations behind the comparison and impact figures used in the presentation.
 
 ## Data-quality checks
 
@@ -163,6 +172,7 @@ The pipeline verifies:
 - Correlations describe association, not causation.
 - The Tableau and Streamlit outputs are historical planning tools, not real-time dispatch or guaranteed savings products.
 - The household savings example in the EDA notebook is an illustrative scenario based on stated flexible-load assumptions.
+- EnergyZero prices are requested inclusive of VAT, but the impact scenario does not model network charges, fixed charges, contract differences, charging losses, or whether an EV is available at midday.
 
 ## Conclusion
 

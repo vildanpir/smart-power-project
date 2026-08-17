@@ -77,9 +77,6 @@ smart-power-project/
 │   ├── Smart_Power_Final_Presentation.pptx
 │   └── assets/
 │       └── amsterdam_hourly_price.csv
-├── docs/
-│   ├── Smart_Power_Teknik_Proje_Rehberi.docx
-│   └── build_technical_interview_guide.py
 ├── sql/
 │   ├── 00_create_database.sql
 │   ├── 01_create_views.sql
@@ -143,13 +140,12 @@ Run these notebooks in order:
 
 The reusable SQL is also available in [`sql/01_create_views.sql`](sql/01_create_views.sql) and [`sql/02_quality_checks.sql`](sql/02_quality_checks.sql).
 
-## Dashboards, presentation and technical guide
+## Dashboards, presentation
 
 - [Tableau workbook](dashboard/smart_power_dashboard.twb) — open it with [the Tableau-ready CSV](dashboard/smart_power_for_tableau.csv) next to the workbook. If Tableau prompts for a missing file on another computer, reconnect the text source to that CSV.
 - [Streamlit prototype](streamlit_app.py) — launch with `streamlit run streamlit_app.py`.
 - [Final stakeholder presentation](presentation/Smart_Power_Final_Presentation.pptx) — seven-slide stakeholder deck, designed for a short historical Streamlit demonstration after slide 5.
 - [Presentation chart data](presentation/assets/amsterdam_hourly_price.csv) — source data for the hourly-price chart used in the deck.
-- [Technical project guide](docs/Smart_Power_Teknik_Proje_Rehberi.docx) — five-page technical guide for interviews and project handover.
 - [Presentation metrics script](src/presentation_metrics.py) — reproducible calculations behind the comparison and impact figures used in the presentation.
 
 ## Data-quality checks

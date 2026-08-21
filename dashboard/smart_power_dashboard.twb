@@ -26,7 +26,7 @@
       <connection class='federated'>
         <named-connections>
           <named-connection caption='smart_power_for_tableau' name='textscan.17n3c610esrpha16y2yb90186clm'>
-            <connection class='textscan' directory='/Users/vildanpirpiroglu/Ironhack/smart-power-project/dashboard' filename='smart_power_for_tableau.csv' password='' server='' workgroup-auth-mode='as-is' />
+            <connection class='textscan' directory='.' filename='smart_power_for_tableau.csv' password='' server='' workgroup-auth-mode='as-is' />
           </named-connection>
         </named-connections>
         <relation connection='textscan.17n3c610esrpha16y2yb90186clm' name='smart_power_for_tableau.csv' table='[smart_power_for_tableau#csv]' type='table'>

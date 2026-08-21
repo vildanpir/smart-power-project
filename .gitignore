@@ -10,3 +10,4 @@ data/*.csv
 .tmp/
 tmp/
 english_data_opportunities.html
+smart_power_code_walkthroughs/

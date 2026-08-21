@@ -4,6 +4,8 @@ Smart Power answers one practical question: **when should flexible electricity u
 
 [![Open the live Streamlit app](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://smart-power-project-77smllbet6dp3ehumkeoqg.streamlit.app/)
 
+[View the live Tableau dashboard](https://public.tableau.com/app/profile/vildan.pirpiroglu/viz/smart_power_dashboard/SmartPowerDashboard)
+
 The project combines API ingestion, hourly data engineering, MySQL, exploratory and statistical analysis, machine learning, Tableau, and a Streamlit prototype in one reproducible workflow. The final historical recommendation is **12:00–16:00 Europe/Amsterdam time** for a consecutive four-hour flexible-load window.
 
 ## Key results
